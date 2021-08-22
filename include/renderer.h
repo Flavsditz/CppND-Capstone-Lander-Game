@@ -5,24 +5,35 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "snake.h"
+#include "entity.hpp"
+#include "lander.hpp"
+#include "infotext.hpp"
 
 class Renderer {
- public:
-  Renderer(const std::size_t screen_width, const std::size_t screen_height,
-           const std::size_t grid_width, const std::size_t grid_height);
-  ~Renderer();
+public:
+    Renderer(std::size_t screen_width, std::size_t screen_height,
+             std::size_t grid_width, std::size_t grid_height);
 
-  void Render(Snake const snake, SDL_Point const &food);
-  void UpdateWindowTitle(int score, int fps);
+    ~Renderer();
 
- private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+    void Render(Lander *lander, InfoText *text);
 
-  const std::size_t screen_width;
-  const std::size_t screen_height;
-  const std::size_t grid_width;
-  const std::size_t grid_height;
+    void UpdateWindowTitle(int score, int fps);
+
+    SDL_Texture *loadTexture(const char *filePath);
+
+private:
+    SDL_Window *sdl_window;
+    SDL_Renderer *sdl_renderer;
+
+    const std::size_t screen_width;
+    const std::size_t screen_height;
+    const std::size_t grid_width;
+    const std::size_t grid_height;
+
+    void RenderEntity(Entity &entity);
+    void RenderLanderInfo(InfoText &text);
+    SDL_Point getSize(SDL_Texture *texture);
 };
 
 #endif
