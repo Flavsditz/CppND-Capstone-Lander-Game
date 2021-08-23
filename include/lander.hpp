@@ -18,9 +18,14 @@ public:
 
     std::string getSpeedInfo();
 
+    void fireRocket();
+    void fireLeftThrusterRocket();
+    void fireRightThrusterRocket();
+
 
 private:
-    float speed;
+    float speedY;
+    float speedX;
 };
 
 #endif //SDL2TEST_LANDER_HPP

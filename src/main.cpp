@@ -13,10 +13,12 @@ int main() {
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
   Controller controller;
-  Game game(kGridWidth, kGridHeight);
+
+  SDL_Texture *landerTexture = renderer.loadTexture("../res/gfx/lander.png");
+  Game game(kGridWidth, kGridHeight, landerTexture);
   game.Run(controller, renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+//  std::cout << "Score: " << game.GetScore() << "\n";
+//  std::cout << "Size: " << game.GetSize() << "\n";
   return 0;
 }
