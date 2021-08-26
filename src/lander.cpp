@@ -46,6 +46,7 @@ void Lander::land() {
 
 void Lander::fireRocket() {
     speedY -= 0.1f;
+    setSpriteNumber(2);
 }
 
 void Lander::fireLeftThrusterRocket() {
@@ -54,4 +55,8 @@ void Lander::fireLeftThrusterRocket() {
 
 void Lander::fireRightThrusterRocket() {
     speedX -= 0.1f;
+}
+
+void Lander::noThruster() {
+    setSpriteNumber(0);
 }

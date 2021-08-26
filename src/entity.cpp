@@ -13,6 +13,10 @@ Entity::Entity(float x, float y, int width, int height, SDL_Texture *tex)
     frame.h = height;
 }
 
+void Entity::setSpriteNumber(int num) {
+    frame.x = num * frame.w;
+}
+
 float Entity::getX() const {
     return x;
 }

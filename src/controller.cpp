@@ -22,6 +22,8 @@ void Controller::HandleInput(bool &running, Lander &lander) const {
                     lander.fireRightThrusterRocket();
                     break;
             }
+        } else {
+            lander.noThruster();
         }
     }
 }

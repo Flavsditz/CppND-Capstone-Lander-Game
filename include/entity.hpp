@@ -12,6 +12,8 @@ class Entity {
 public:
     Entity(float x, float y, int width, int height, SDL_Texture *tex);
 
+    void setSpriteNumber(int num);
+
     float getX() const;
 
     float getY() const;

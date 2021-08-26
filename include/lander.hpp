@@ -24,6 +24,7 @@ public:
     void fireRocket();
     void fireLeftThrusterRocket();
     void fireRightThrusterRocket();
+    void noThruster();
 
 
 private:
