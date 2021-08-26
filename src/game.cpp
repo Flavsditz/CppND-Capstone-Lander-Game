@@ -24,7 +24,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         // Lander information to be displayed
         std::vector<InfoText> hud{
                 InfoText(lander.getHorizontalSpeedInfo()),
-                InfoText(lander.getVerticalSpeedInfo())
+                InfoText(lander.getVerticalSpeedInfo()),
+                InfoText(lander.getAltitudeInfo(groundLevel))
         };
         renderer.Render(&lander, hud);
 

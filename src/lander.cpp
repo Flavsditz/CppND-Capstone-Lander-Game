@@ -5,7 +5,7 @@
 #include <sstream>
 #include "../include/lander.hpp"
 
-Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), speedY(0.1f), speedX(0),
+Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 22, tex), speedY(0.1f), speedX(0),
                                                      landerHeight(21) {};
 
 void Lander::update() {
@@ -42,6 +42,7 @@ std::string Lander::getHorizontalSpeedInfo() {
 
 void Lander::land() {
     speedY = 0;
+    speedX = 0;
 }
 
 void Lander::fireRocket() {
@@ -59,4 +60,14 @@ void Lander::fireRightThrusterRocket() {
 
 void Lander::noThruster() {
     setSpriteNumber(0);
+}
+
+std::string Lander::getAltitudeInfo(size_t groundLevel) {
+    std::ostringstream os;
+
+    char buffer[256];
+    sprintf(buffer, "%d", int(groundLevel) - int(y) - landerHeight);
+
+    os << " Altitude (m): " << buffer;
+    return os.str();
 }

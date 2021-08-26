@@ -27,6 +27,8 @@ public:
     void noThruster();
 
 
+    std::string  getAltitudeInfo(size_t groundLevel);
+
 private:
     float speedY;
     float speedX;
