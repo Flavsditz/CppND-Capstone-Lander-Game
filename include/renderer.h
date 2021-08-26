@@ -16,7 +16,7 @@ public:
 
     ~Renderer();
 
-    void Render(Lander *lander, InfoText *text);
+    void Render(Lander *lander, std::vector<InfoText> hud);
 
     void UpdateWindowTitle(int score, int fps);
 
@@ -32,7 +32,7 @@ private:
     const std::size_t grid_height;
 
     void RenderEntity(Entity &entity);
-    void RenderLanderInfo(InfoText &text);
+    void RenderLanderInfo(std::vector<InfoText> hud);
     SDL_Point getSize(SDL_Texture *texture);
 };
 

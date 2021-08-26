@@ -15,11 +15,11 @@ void Controller::HandleInput(bool &running, Lander &lander) const {
                     break;
 
                 case SDLK_LEFT:
-
+                    lander.fireLeftThrusterRocket();
                     break;
 
                 case SDLK_RIGHT:
-
+                    lander.fireRightThrusterRocket();
                     break;
             }
         }

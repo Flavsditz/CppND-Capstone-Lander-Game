@@ -5,29 +5,38 @@
 #include <sstream>
 #include "../include/lander.hpp"
 
-Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), speedY(0.1f), speedX(0), landerHeight(21) {};
+Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), speedY(0.1f), speedX(0),
+                                                     landerHeight(21) {};
 
 void Lander::update() {
     speedY += 0.02f;
 
     y += speedY;
+
+    x += speedX;
 }
 
 int Lander::getLanderHeight() {
     return landerHeight;
 }
 
-std::string Lander::getSpeedInfo() {
+std::string Lander::getVerticalSpeedInfo() {
     std::ostringstream os;
 
-    char bufferY[256];
-    sprintf(bufferY, "%.1f", speedY);
+    char buffer[256];
+    sprintf(buffer, "%.1f", speedY);
 
-    char bufferX[256];
-    sprintf(bufferX, "%.1f", speedX);
+    os << "Speed (Y): " << buffer;
+    return os.str();
+}
 
-    os << "Speed (Y): " << bufferY;
-    os << " - Speed (X): " << bufferX;
+std::string Lander::getHorizontalSpeedInfo() {
+    std::ostringstream os;
+
+    char buffer[256];
+    sprintf(buffer, "%.1f", speedX);
+
+    os << " Speed (X): " << buffer;
     return os.str();
 }
 
@@ -40,9 +49,9 @@ void Lander::fireRocket() {
 }
 
 void Lander::fireLeftThrusterRocket() {
-
+    speedX += 0.1f;
 }
 
 void Lander::fireRightThrusterRocket() {
-
+    speedX -= 0.1f;
 }

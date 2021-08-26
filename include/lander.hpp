@@ -16,7 +16,8 @@ public:
 
     void update();
 
-    std::string getSpeedInfo();
+    std::string getVerticalSpeedInfo();
+    std::string getHorizontalSpeedInfo();
     int getLanderHeight();
 
     void land();
