@@ -16,7 +16,7 @@ public:
 
 private:
     Lander lander;
-    SDL_Point food;
+    size_t groundLevel;
 
     std::random_device dev;
 

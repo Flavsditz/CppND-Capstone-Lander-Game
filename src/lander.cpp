@@ -5,12 +5,16 @@
 #include <sstream>
 #include "../include/lander.hpp"
 
-Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), speedY(0.1f), speedX(0) {};
+Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), speedY(0.1f), speedX(0), landerHeight(21) {};
 
 void Lander::update() {
     speedY += 0.02f;
 
     y += speedY;
+}
+
+int Lander::getLanderHeight() {
+    return landerHeight;
 }
 
 std::string Lander::getSpeedInfo() {
@@ -25,6 +29,10 @@ std::string Lander::getSpeedInfo() {
     os << "Speed (Y): " << bufferY;
     os << " - Speed (X): " << bufferX;
     return os.str();
+}
+
+void Lander::land() {
+    speedY = 0;
 }
 
 void Lander::fireRocket() {

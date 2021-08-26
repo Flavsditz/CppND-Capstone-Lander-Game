@@ -3,7 +3,7 @@
 #include "SDL.h"
 
 Game::Game(size_t grid_width, size_t grid_height, SDL_Texture *landerTexture)
-        : lander(grid_width / 2, 0, landerTexture) {}
+        : lander(grid_width / 2, 0, landerTexture), groundLevel(grid_height) {}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
@@ -53,4 +53,7 @@ void Game::Update(Lander *lander) {
 
 
     //Check for impact with the ground
+    if(lander->getY() >= groundLevel - lander->getLanderHeight()){
+        lander->land();
+    }
 }

@@ -17,7 +17,9 @@ public:
     void update();
 
     std::string getSpeedInfo();
+    int getLanderHeight();
 
+    void land();
     void fireRocket();
     void fireLeftThrusterRocket();
     void fireRightThrusterRocket();
@@ -26,6 +28,7 @@ public:
 private:
     float speedY;
     float speedX;
+    int landerHeight;
 };
 
 #endif //SDL2TEST_LANDER_HPP
