@@ -17,6 +17,6 @@ find_package(SDL2_ttf REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS} src)
 
 
-add_executable(SnakeGame src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/snake.cpp include/entity.hpp src/entity.cpp include/lander.hpp src/lander.cpp include/infotext.hpp src/infotext.cpp)
+add_executable(LanderGame src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/snake.cpp include/entity.hpp src/entity.cpp include/lander.hpp src/lander.cpp include/infotext.hpp src/infotext.cpp)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(SnakeGame ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+target_link_libraries(LanderGame ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
