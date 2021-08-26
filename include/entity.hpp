@@ -10,11 +10,11 @@
 
 class Entity {
 public:
-    Entity(int x, int y, int width, int height, SDL_Texture *tex);
+    Entity(float x, float y, int width, int height, SDL_Texture *tex);
 
-    int getX() const;
+    float getX() const;
 
-    int getY() const;
+    float getY() const;
 
     SDL_Texture *getTex();
 
@@ -25,8 +25,8 @@ private:
     SDL_Texture *tex;
 
 protected:
-    int x;
-    int y;
+    float x;
+    float y;
 };
 
 #endif //SDL2TEST_ENTITY_HPP

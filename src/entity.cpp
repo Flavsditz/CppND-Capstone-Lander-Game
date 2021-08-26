@@ -5,7 +5,7 @@
 #include "../include/entity.hpp"
 #include <SDL2/SDL.h>
 
-Entity::Entity(int x, int y, int width, int height, SDL_Texture *tex)
+Entity::Entity(float x, float y, int width, int height, SDL_Texture *tex)
         : x(x), y(y), tex(tex) {
     frame.x = 0;
     frame.y = 0;
@@ -13,11 +13,11 @@ Entity::Entity(int x, int y, int width, int height, SDL_Texture *tex)
     frame.h = height;
 }
 
-int Entity::getX() const {
+float Entity::getX() const {
     return x;
 }
 
-int Entity::getY() const {
+float Entity::getY() const {
     return y;
 }
 

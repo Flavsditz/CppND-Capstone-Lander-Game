@@ -9,7 +9,7 @@ Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 21, tex), 
                                                      landerHeight(21) {};
 
 void Lander::update() {
-    speedY += 0.02f;
+    speedY += 0.01f;
 
     y += speedY;
 
