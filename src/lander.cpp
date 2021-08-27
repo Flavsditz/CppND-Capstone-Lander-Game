@@ -4,14 +4,11 @@
 
 #include <sstream>
 #include "../include/lander.hpp"
+#include "../include/numbergenerator.hpp"
 
 Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 22, tex),
                                                      landerHeight(21) {
-    std::random_device dev{};
-    std::mt19937 engine{dev()};
-    std::uniform_real_distribution<float> randomSpeedX{-1.5f, 1.5f};
-
-    speedX = randomSpeedX(engine);
+    speedX = NumberGenerator::randomFloat(-1.5f, 1.5f);
 }
 
 void Lander::update() {

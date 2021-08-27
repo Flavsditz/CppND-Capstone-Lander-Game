@@ -1,7 +1,6 @@
 #include "../include/controller.h"
 #include <iostream>
 #include "SDL.h"
-#include "../include/snake.h"
 
 void Controller::HandleInput(bool &running, Lander &lander) const {
     SDL_Event e;

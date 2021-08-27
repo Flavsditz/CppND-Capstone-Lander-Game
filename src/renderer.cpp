@@ -1,17 +1,15 @@
 #include "../include/renderer.h"
 #include "../include/entity.hpp"
 #include "../include/lander.hpp"
+#include "../include/numbergenerator.hpp"
 #include <iostream>
 #include <string>
 #include <utility>
 
 Renderer::Renderer(const std::size_t screen_width,
-                   const std::size_t screen_height,
-                   const std::size_t grid_width, const std::size_t grid_height)
+                   const std::size_t screen_height)
         : screen_width(screen_width),
-          screen_height(screen_height),
-          grid_width(grid_width),
-          grid_height(grid_height) {
+          screen_height(screen_height) {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cerr << "SDL could not initialize.\n";
@@ -54,13 +52,14 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(Lander &pLander, std::vector<InfoText> hud) {
+void Renderer::Render(Lander &pLander, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel) {
     // Clear screen
     SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(sdl_renderer);
 
     RenderEntity(pLander);
     RenderLanderInfo(std::move(hud));
+    RenderGround(landingStart, landingSize, groundLevel);
 
     // Update Screen
     SDL_RenderPresent(sdl_renderer);
@@ -110,6 +109,29 @@ void Renderer::RenderLanderInfo(std::vector<InfoText> hud) {
         SDL_RenderCopy(sdl_renderer, message, nullptr, &messageRect);
     }
 
+}
+
+void Renderer::RenderGround(int landingStart, int landingSize, int groundLevel) {
+
+    int lastX = 0;
+    int lastY = groundLevel;
+
+    for (int i = 1; i < screen_width; ++i) {
+        int y = 0;
+
+        if (i >= landingStart && i <= landingStart + landingSize) {
+            y = 0;
+            SDL_SetRenderDrawColor(sdl_renderer, 255, 100, 100, 255);
+        } else {
+            float noise = NumberGenerator::noise(i / 10.0) * 30;
+            y = noise < 0 ? 0 : noise;
+            SDL_SetRenderDrawColor(sdl_renderer, 200, 200, 200, 255);
+        }
+
+        SDL_RenderDrawLine(sdl_renderer, lastX, lastY, i, y + groundLevel);
+        lastX = i;
+        lastY = y + groundLevel;
+    }
 }
 
 SDL_Point Renderer::getSize(SDL_Texture *texture) {

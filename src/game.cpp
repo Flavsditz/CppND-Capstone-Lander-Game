@@ -1,18 +1,21 @@
 #include "../include/game.h"
-#include <iostream>
 #include "SDL.h"
+#include "../include/numbergenerator.hpp"
 
-Game::Game(size_t grid_width, size_t grid_height, SDL_Texture *landerTexture)
-        : lander(grid_width / 2, 0, landerTexture), groundLevel(grid_height) {}
+Game::Game(size_t screenWidth, size_t screenHeight, SDL_Texture *landerTexture)
+        : lander(screenWidth / 2, 0, landerTexture), groundLevel(screenHeight-20) {}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
-               std::size_t target_frame_duration) {
+               std::size_t target_frame_duration, int screen_width) {
     Uint32 title_timestamp = SDL_GetTicks();
     Uint32 frame_start;
     Uint32 frame_end;
     Uint32 frame_duration;
     int frame_count = 0;
     bool running = true;
+
+    int landingSize = 50;
+    int landingStart = NumberGenerator::randomInt(0, screen_width - landingSize);
 
     while (running) {
         frame_start = SDL_GetTicks();
@@ -27,7 +30,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                 InfoText(lander.getVerticalSpeedInfo()),
                 InfoText(lander.getAltitudeInfo(groundLevel))
         };
-        renderer.Render(lander, hud);
+        renderer.Render(lander, hud, landingStart, landingSize, groundLevel);
 
         frame_end = SDL_GetTicks();
 

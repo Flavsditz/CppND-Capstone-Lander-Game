@@ -6,7 +6,6 @@
 #define SDL2TEST_LANDER_HPP
 
 #include <string>
-#include <random>
 #include <cstdlib>
 #include <ctime>
 #include <SDL_render.h>
