@@ -19,7 +19,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, lander);
-        Update(&lander);
+        Update(lander);
 
         // Lander information to be displayed
         std::vector<InfoText> hud{
@@ -27,7 +27,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                 InfoText(lander.getVerticalSpeedInfo()),
                 InfoText(lander.getAltitudeInfo(groundLevel))
         };
-        renderer.Render(&lander, hud);
+        renderer.Render(lander, hud);
 
         frame_end = SDL_GetTicks();
 
@@ -52,12 +52,12 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     }
 }
 
-void Game::Update(Lander *lander) {
-    lander->update();
+void Game::Update(Lander &pLander) {
+    lander.update();
 
 
     //Check for impact with the ground
-    if (lander->getY() >= groundLevel - lander->getLanderHeight()) {
-        lander->land();
+    if (lander.getY() >= groundLevel - lander.getLanderHeight()) {
+        lander.land();
     }
 }

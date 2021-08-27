@@ -16,7 +16,7 @@ public:
 
     ~Renderer();
 
-    void Render(Lander *lander, std::vector<InfoText> hud);
+    void Render(Lander &lander, std::vector<InfoText> hud);
 
     void UpdateWindowTitle(int score, int fps);
 

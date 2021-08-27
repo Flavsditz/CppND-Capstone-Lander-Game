@@ -3,6 +3,7 @@
 #include "../include/lander.hpp"
 #include <iostream>
 #include <string>
+#include <utility>
 
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
@@ -53,13 +54,13 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(Lander *lander, std::vector<InfoText> hud) {
+void Renderer::Render(Lander &pLander, std::vector<InfoText> hud) {
     // Clear screen
     SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(sdl_renderer);
 
-    RenderEntity(*lander);
-    RenderLanderInfo(hud);
+    RenderEntity(pLander);
+    RenderLanderInfo(std::move(hud));
 
     // Update Screen
     SDL_RenderPresent(sdl_renderer);
@@ -100,11 +101,11 @@ void Renderer::RenderLanderInfo(std::vector<InfoText> hud) {
 
         SDL_Point size = getSize(message);
 
-        SDL_Rect messageRect; //create a rect
-        messageRect.x = screen_width - size.x - 20;  //controls the rect's x coordinate
-        messageRect.y = 20 * (i + 1); // controls the rect's y coordinte
-        messageRect.w = size.x; // controls the width of the rect
-        messageRect.h = size.y; // controls the height of the rect
+        SDL_Rect messageRect;
+        messageRect.x = screen_width - size.x - 20;
+        messageRect.y = 20 * (i + 1);
+        messageRect.w = size.x;
+        messageRect.h = size.y;
 
         SDL_RenderCopy(sdl_renderer, message, nullptr, &messageRect);
     }

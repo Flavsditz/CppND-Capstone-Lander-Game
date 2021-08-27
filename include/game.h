@@ -20,7 +20,7 @@ private:
 
     int score{0};
 
-    void Update(Lander *pLander);
+    void Update(Lander &pLander);
 };
 
 #endif
