@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <random>
 #include <vector>
 #include "SDL.h"
 #include "controller.h"
@@ -18,8 +17,6 @@ public:
 private:
     Lander lander;
     size_t groundLevel;
-
-    std::random_device dev;
 
     int score{0};
 

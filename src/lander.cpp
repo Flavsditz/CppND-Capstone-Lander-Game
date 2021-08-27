@@ -5,8 +5,14 @@
 #include <sstream>
 #include "../include/lander.hpp"
 
-Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 22, tex), speedY(0.1f), speedX(0),
-                                                     landerHeight(21) {};
+Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 22, tex),
+                                                     landerHeight(21) {
+    std::random_device dev{};
+    std::mt19937 engine{dev()};
+    std::uniform_real_distribution<float> randomSpeedX{-1.5f, 1.5f};
+
+    speedX = randomSpeedX(engine);
+}
 
 void Lander::update() {
     speedY += 0.01f;
