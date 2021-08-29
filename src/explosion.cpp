@@ -2,7 +2,7 @@
 // Created by fdiez on 8/29/21.
 //
 
-#include "explosion.hpp"
+#include "../include/explosion.hpp"
 
 Explosion::Explosion(float x, float y, SDL_Texture *tex) : Entity(x, y, 84, 50, tex) {
 }

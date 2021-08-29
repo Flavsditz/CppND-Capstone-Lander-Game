@@ -18,6 +18,6 @@ int main() {
 
     Game game(kScreenWidth, kScreenHeight, landerTexture, landerCrew, explosionCrew);
     game.Run(controller, renderer, kMsPerFrame, kScreenWidth);
-    std::cout << "Game has terminated successfully!\n";
+
     return 0;
 }
