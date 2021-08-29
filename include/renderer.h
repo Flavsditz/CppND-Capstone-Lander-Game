@@ -15,7 +15,7 @@ public:
 
     ~Renderer();
 
-    void Render(Lander &lander, Crew &crew, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel);
+    void Render(const std::vector<Entity>& entities, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel);
 
     void UpdateWindowTitle(int score, int fps);
 

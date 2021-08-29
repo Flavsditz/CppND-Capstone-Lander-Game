@@ -14,7 +14,9 @@ int main() {
 
     SDL_Texture *landerTexture = renderer.loadTexture("../res/gfx/lander_sprite.png");
     SDL_Texture *landerCrew = renderer.loadTexture("../res/gfx/lander_crew.png");
-    Game game(kScreenWidth, kScreenHeight, landerTexture, landerCrew);
+    SDL_Texture *explosionCrew = renderer.loadTexture("../res/gfx/explosion.png");
+
+    Game game(kScreenWidth, kScreenHeight, landerTexture, landerCrew, explosionCrew);
     game.Run(controller, renderer, kMsPerFrame, kScreenWidth);
     std::cout << "Game has terminated successfully!\n";
     return 0;

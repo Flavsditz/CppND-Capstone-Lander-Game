@@ -9,6 +9,7 @@
 Lander::Lander(float x, float y, SDL_Texture *tex) : Entity(x, y, 20, 22, tex),
                                                      landerHeight(21) {
     speedX = NumberGenerator::randomFloat(-1.5f, 1.5f);
+    speedY = 0.0f;
 }
 
 void Lander::update() {
@@ -74,4 +75,11 @@ std::string Lander::getAltitudeInfo(size_t groundLevel) {
 
     os << " Altitude (m): " << buffer;
     return os.str();
+}
+
+bool Lander::isLandingSpeed() {
+    bool horizSpeedOk = speedX <= 0.1f;
+    bool vertSpeedOk = speedY < 1.0f;
+
+    return horizSpeedOk && vertSpeedOk;
 }

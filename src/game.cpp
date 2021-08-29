@@ -2,8 +2,10 @@
 #include "SDL.h"
 #include "../include/numbergenerator.hpp"
 
-Game::Game(size_t screenWidth, size_t screenHeight, SDL_Texture *landerTexture, SDL_Texture *crewTexture)
-        : lander(screenWidth / 2, 0, landerTexture), crew(-50, -50, crewTexture), groundLevel(screenHeight - 20) {}
+Game::Game(size_t screenWidth, size_t screenHeight, SDL_Texture *landerTexture, SDL_Texture *crewTexture,
+           SDL_Texture *explosionTexture)
+        : lander(screenWidth / 2, 0, landerTexture), crew(-50, -50, crewTexture),
+          explosion(-100, -100, explosionTexture), groundLevel(screenHeight - 20) {}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration, int screen_width) {
@@ -24,7 +26,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, lander);
-        Update(lander);
+        Update(landingStart, landingStart + landingSize);
 
         // Lander information to be displayed
         std::vector<InfoText> hud{
@@ -32,7 +34,13 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                 InfoText(lander.getVerticalSpeedInfo()),
                 InfoText(lander.getAltitudeInfo(groundLevel))
         };
-        renderer.Render(lander, crew, hud, landingStart, landingSize, groundLevel);
+
+        std::vector<Entity> entities{
+                lander,
+                crew,
+                explosion
+        };
+        renderer.Render(entities, hud, landingStart, landingSize, groundLevel);
 
         frame_end = SDL_GetTicks();
 
@@ -57,12 +65,18 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     }
 }
 
-void Game::Update(Lander &pLander) {
+void Game::Update(int landingAreaStart, int landingAreaEnd) {
     lander.update();
 
     //Check for impact with the ground
     if (lander.getY() >= groundLevel - lander.getLanderHeight()) {
-        lander.land(groundLevel);
-        crew.deploy(groundLevel);
+        if (lander.isLandingSpeed() && lander.getX() >= landingAreaStart && lander.getX() <= landingAreaEnd) {
+            lander.land(groundLevel);
+            crew.deploy(groundLevel);
+        } else {
+            lander.land(groundLevel);
+            lander.hide();
+            explosion.show(lander.getX(), groundLevel);
+        }
     }
 }

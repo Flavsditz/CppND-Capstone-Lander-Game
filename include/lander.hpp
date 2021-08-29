@@ -32,6 +32,8 @@ public:
 
     std::string  getAltitudeInfo(size_t groundLevel);
 
+    bool isLandingSpeed();
+
 private:
     float speedY;
     float speedX;

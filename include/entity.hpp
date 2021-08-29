@@ -22,6 +22,8 @@ public:
 
     SDL_Rect getFrame();
 
+    void hide();
+
 private:
     SDL_Rect frame;
     SDL_Texture *tex;

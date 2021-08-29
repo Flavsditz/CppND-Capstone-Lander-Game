@@ -32,3 +32,7 @@ SDL_Texture *Entity::getTex() {
 SDL_Rect Entity::getFrame() {
     return frame;
 }
+
+void Entity::hide() {
+    y = 10000.0f;
+}
