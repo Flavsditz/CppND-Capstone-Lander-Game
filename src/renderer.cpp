@@ -52,12 +52,13 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(Lander &pLander, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel) {
+void Renderer::Render(Lander &pLander, Crew &pCrew, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel) {
     // Clear screen
     SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(sdl_renderer);
 
     RenderEntity(pLander);
+    RenderEntity(pCrew);
     RenderLanderInfo(std::move(hud));
     RenderGround(landingStart, landingSize, groundLevel);
 

@@ -23,7 +23,7 @@ public:
     std::string getHorizontalSpeedInfo();
     int getLanderHeight();
 
-    void land();
+    void land(size_t i);
     void fireRocket();
     void fireLeftThrusterRocket();
     void fireRightThrusterRocket();

@@ -2,8 +2,8 @@
 #include "SDL.h"
 #include "../include/numbergenerator.hpp"
 
-Game::Game(size_t screenWidth, size_t screenHeight, SDL_Texture *landerTexture)
-        : lander(screenWidth / 2, 0, landerTexture), groundLevel(screenHeight-20) {}
+Game::Game(size_t screenWidth, size_t screenHeight, SDL_Texture *landerTexture, SDL_Texture *crewTexture)
+        : lander(screenWidth / 2, 0, landerTexture), crew(-50, -50, crewTexture), groundLevel(screenHeight - 20) {}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration, int screen_width) {
@@ -16,6 +16,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     int landingSize = 50;
     int landingStart = NumberGenerator::randomInt(0, screen_width - landingSize);
+
+    crew.setDeboardX(landingStart);
 
     while (running) {
         frame_start = SDL_GetTicks();
@@ -30,7 +32,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                 InfoText(lander.getVerticalSpeedInfo()),
                 InfoText(lander.getAltitudeInfo(groundLevel))
         };
-        renderer.Render(lander, hud, landingStart, landingSize, groundLevel);
+        renderer.Render(lander, crew, hud, landingStart, landingSize, groundLevel);
 
         frame_end = SDL_GetTicks();
 
@@ -58,9 +60,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 void Game::Update(Lander &pLander) {
     lander.update();
 
-
     //Check for impact with the ground
     if (lander.getY() >= groundLevel - lander.getLanderHeight()) {
-        lander.land();
+        lander.land(groundLevel);
+        crew.deploy(groundLevel);
     }
 }

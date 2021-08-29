@@ -7,6 +7,7 @@
 #include "entity.hpp"
 #include "lander.hpp"
 #include "infotext.hpp"
+#include "crew.hpp"
 
 class Renderer {
 public:
@@ -14,7 +15,7 @@ public:
 
     ~Renderer();
 
-    void Render(Lander &lander, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel);
+    void Render(Lander &lander, Crew &crew, std::vector<InfoText> hud, int landingStart, int landingSize, int groundLevel);
 
     void UpdateWindowTitle(int score, int fps);
 

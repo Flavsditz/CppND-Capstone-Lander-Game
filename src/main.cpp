@@ -13,7 +13,8 @@ int main() {
     Controller controller;
 
     SDL_Texture *landerTexture = renderer.loadTexture("../res/gfx/lander_sprite.png");
-    Game game(kScreenWidth, kScreenHeight, landerTexture);
+    SDL_Texture *landerCrew = renderer.loadTexture("../res/gfx/lander_crew.png");
+    Game game(kScreenWidth, kScreenHeight, landerTexture, landerCrew);
     game.Run(controller, renderer, kMsPerFrame, kScreenWidth);
     std::cout << "Game has terminated successfully!\n";
     return 0;

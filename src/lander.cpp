@@ -43,9 +43,10 @@ std::string Lander::getHorizontalSpeedInfo() {
     return os.str();
 }
 
-void Lander::land() {
+void Lander::land(size_t groundLevel) {
     speedY = 0;
     speedX = 0;
+    y = floor(groundLevel - landerHeight);
 }
 
 void Lander::fireRocket() {
